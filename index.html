@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>navigator.geolocation.getCurrentPosition Test</title>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+        var load = function () {
+            if (navigator.geolocation) {
+                $("#info").append("navigator.geolocation supported<br/>");
+
+                var options = {
+                    enableHighAccuracy: false,
+                    timeout: 2 * 1000,
+                    maximumAge: 10 * 60 * 1000
+                };
+
+
+                $("#info").append("navigator.geolocation enableHighAccuracy=" + options.enableHighAccuracy + ";timeout=" + options.timeout + ";maximumAge=" + options.maximumAge + "<br/>");
+
+                function success(pos) {
+                    $("#info").append("navigator.geolocation lat=" + pos.coords.latitude + ";lon=" + pos.coords.longitude + ";acc=" + pos.coords.accuracy + "<br/>");
+                };
+
+                function error(err) {
+                    $("#info").append("navigator.geolocation error code=" + err.code + ";message=" + err.message + "<br/>");
+                };
+
+                navigator.geolocation.getCurrentPosition(success, error, options);
+            }
+            else {
+                $("#info").append("navigator.geolocation not supported<br/>");
+            }
+
+        };
+    </script>
+</head>
+<body onload="load();">
+    <h3>navigator.geolocation.getCurrentPosition Test</h3>
+    <div id="info"></div>
+</body>
+</html>
