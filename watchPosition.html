@@ -2,37 +2,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Geolocation watchPosition</title>
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script>
         var load = function () {
+            var infoDiv = document.getElementById('info');
             if (navigator.geolocation) {
-                $("#info").append("navigator.geolocation supported<br/>");
+                infoDiv.innerHTML += "navigator.geolocation supported<br/>";
                 var options = {
                     enableHighAccuracy: false,
                     timeout: 2 * 1000,
                     maximumAge: 10 * 60 * 1000
                 };
-                $("#info").append("navigator.geolocation enableHighAccuracy=" + options.enableHighAccuracy + ";timeout=" + options.timeout + ";maximumAge=" + options.maximumAge + "<br/>");
+                infoDiv.innerHTML += "navigator.geolocation enableHighAccuracy=" + options.enableHighAccuracy + ";timeout=" + options.timeout + ";maximumAge=" + options.maximumAge + "<br/>";
                 var geoLocationWatcherId =
                     navigator.geolocation.watchPosition(
                         function success(pos) {
-                            $("#info").append("navigator.geolocation lat=" + pos.coords.latitude + ";lon=" + pos.coords.longitude + ";acc=" + pos.coords.accuracy + "<br/>");
+                            infoDiv.innerHTML += "navigator.geolocation lat=" + pos.coords.latitude + ";lon=" + pos.coords.longitude + ";acc=" + pos.coords.accuracy + "<br/>";
                         },
                         function error(err) {
-                            $("#info").append("navigator.geolocation err code= " + err.code + " Message: " + err.message + "<br/>");
+                            infoDiv.innerHTML += "navigator.geolocation err code= " + err.code + " Message: " + err.message + "<br/>";
                         },
                         options
                     );
             }
             else {
-                $("#info").append("navigator.geolocation not supported<br/>");
+                infoDiv.innerHTML += "navigator.geolocation not supported<br/>";
             }
-
         };
     </script>
 </head>
 <body onload="load();">
-    <h3>Geolocation watchPosition Test</h3><a href="index.html">Index</a><br /><br />
+    <h3>Geolocation watchPosition Test</h3>
     <div id="info"></div>
 </body>
 </html>
